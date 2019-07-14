@@ -338,7 +338,7 @@ public class StoryTest {
         ServiceManager serviceManager = new ServiceManager(1,(ParkingLot) null,parkingBoys);//管理着parkingBoy
 
         //when
-        Ticket ticket = serviceManager.parking(new Integer(1),new Car(1));//让id为1的boy去停车
+        Ticket ticket = serviceManager.parking(1,new Car(1));//让id为1的boy去停车
         //then
 
         Assertions.assertEquals(new Integer(1),ticket.getOperatorId()); //停车人的id与预期相符
@@ -359,10 +359,53 @@ public class StoryTest {
         Car car = new Car(1);
         //when
         Ticket ticket = serviceManager.parking(car);
-        Car newCar = (Car) serviceManager.redeemCar(new Integer(1),ticket);//让id为1的boy去取车
+        Car newCar = (Car) serviceManager.redeemCar(1,ticket);//让id为1的boy去取车
         //then
 
         Assertions.assertEquals(car,newCar); //取到之前停的车
+    }
+
+    /**
+     *  service manager 可以指定某个泊车男孩去停车,车位满，manager向顾客显示错误信息
+     */
+    @Test
+    public void should_return_error_msg_when_manager_specify_a_parking_boy_to_store_but_fail() {
+        //given
+        ParkingLot parkingLot = new ParkingLot(1,0);
+        ParkingBoy parkingBoy =new ParkingBoy(1,parkingLot);
+
+        List<ParkingBoy> parkingBoys = new ArrayList<>();
+        parkingBoys.add(parkingBoy);
+        ServiceManager serviceManager = new ServiceManager(1,(ParkingLot) null,parkingBoys);//管理着parkingBoy
+
+        //when
+        Ticket ticket = serviceManager.parking(1,new Car(1));//让id为1的boy去停车
+        //then
+
+        Assertions.assertEquals("Not enough position.",serviceManager.getErrorMsg());
+    }
+
+    /**
+     *  service manager 指定某个泊车男孩拿 错误 的票去取车
+     */
+    @Test
+    public void should_return_error_msg_when_manager_specify_a_parking_boy_to_fetch_but_fail() {
+        //given
+        ParkingLot parkingLot = new ParkingLot(1,5);
+        ParkingBoy parkingBoy =new ParkingBoy(1,parkingLot);
+
+        List<ParkingBoy> parkingBoys = new ArrayList<>();
+        parkingBoys.add(parkingBoy);
+        ServiceManager serviceManager = new ServiceManager(1,parkingLot,parkingBoys);//管理着parkingBoy
+        Car car = new Car(1);
+        //when
+        serviceManager.parking(car);
+        Ticket ticket = new Ticket(2);
+        ticket.setParkingLotId(1);
+        Car newCar = (Car) serviceManager.redeemCar(1,ticket);//让1号boy去取2车，错误的票
+        //then
+
+        Assertions.assertEquals("Unrecognized parking ticket.",serviceManager.getErrorMsg()); //取到之前停的车
     }
 
 

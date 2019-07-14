@@ -59,11 +59,13 @@ public class ParkingBoy {
             return null;
         }
         Car car = null;
-        for(int i=0;i<parkingLots.size();i++){
-            if(ticket.getParkingLotId().equals(parkingLots.get(i).getParkingLotId())){
-                car = parkingLots.get(i).getCar(ticket.getCarId());
-                ticket.setOperatorId(this.parkingBoyId);
-                break;
+        if(ticket.getParkingLotId()!=null) {
+            for (int i = 0; i < parkingLots.size(); i++) {
+                if (ticket.getParkingLotId().equals(parkingLots.get(i).getParkingLotId())) {
+                    car = parkingLots.get(i).getCar(ticket.getCarId());
+                    ticket.setOperatorId(this.parkingBoyId);
+                    break;
+                }
             }
         }
         if(car == null){
