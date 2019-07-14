@@ -51,8 +51,8 @@ public class StoryTest {
     @Test
     public void should_return_carCount_when_park_cars() {
         //given
-        Car car1 = new Car();
-        Car car2 = new Car();
+        Car car1 = new Car(1);
+        Car car2 = new Car(2);
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
@@ -159,6 +159,60 @@ public class StoryTest {
         Assertions.assertNull(ticket);
     }
 
+    /**
+     *  给已使用票,能询问到错误原因
+     */
+    @Test
+    public void should_return_error_msg_when_ticket_is_invalidity() {
+        //given
+//        Car maserati = new Car(200);
+        Ticket ticket = new Ticket(1);
+        ticket.setValidity(false);
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+        //when
+//        Ticket maseratiTicket = parkingBoy.parking(maserati);
+        parkingBoy.redeemCar(ticket);
+
+        //then
+        Assertions.assertEquals("Unrecognized parking ticket.",parkingBoy.getErrorMsg());
+    }
+
+    /**
+     *  给泊车人没提供的票,能询问到错误原因
+     */
+    @Test
+    public void should_return_error_msg_when_ticket_is_not_provide() {
+        //given
+        Car maserati = new Car(200);
+        Ticket ticket = new Ticket(1);
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+        //when
+        Ticket maseratiTicket = parkingBoy.parking(maserati);
+        parkingBoy.redeemCar(ticket);
+
+        //then
+        Assertions.assertEquals("Unrecognized parking ticket.",parkingBoy.getErrorMsg());
+    }
+
+    /**
+     *  没给票,能询问到错误原因
+     */
+    @Test
+    public void should_return_error_msg_when_do_not_submit_ticket() {
+        //given
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+        //when
+        parkingBoy.redeemCar(null);
+
+        //then
+        Assertions.assertEquals("Please provide your parking ticket.",parkingBoy.getErrorMsg());
+    }
 
 
 }

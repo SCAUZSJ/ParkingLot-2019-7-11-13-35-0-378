@@ -48,8 +48,8 @@ public class StoryTest {
     @Test
     public void should_return_carCount_when_park_cars() {
         //given
-        Car car1 = new Car();
-        Car car2 = new Car();
+        Car car1 = new Car(1);
+        Car car2 = new Car(2);
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 

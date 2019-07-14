@@ -26,7 +26,7 @@ public class Ticket {
     }
 
     public void setValidity(boolean validity) {
-        validity = validity;
+        this.validity = validity;
     }
 
     public String getRemark() {
