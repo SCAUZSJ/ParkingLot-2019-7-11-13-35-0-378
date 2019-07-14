@@ -1,4 +1,5 @@
-package com.thoughtworks.tdd.story_4;
+package com.thoughtworks.tdd.story_5;
+
 
 
 
@@ -264,6 +265,31 @@ public class StoryTest {
         Ticket ticket = smartParkingBoy.parking(new Car(1));
         //then
         Assertions.assertEquals(new Integer(3),ticket.getParkingLotId());
+    }
+
+    /**
+     *  smart parkingboy 可以把车停到剩余车位最多的停车场
+     */
+    @Test
+    public void should_choose_usage_min_parking_lot_when_park_the_car() {
+        //given
+        ParkingLot parkingLot1 = new ParkingLot(1,5);
+        ParkingLot parkingLot2 = new ParkingLot(2,3);
+        List<ParkingLot> parkingLots = new ArrayList<>(Arrays.asList(parkingLot1,parkingLot2));
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLots); //super 管理2个停车场
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot1); //普通男孩管理1
+
+        //when
+        Ticket ticket1 = parkingBoy.parking(new Car(1));
+
+        Ticket ticket2 = superSmartParkingBoy.parking(new Car(2));
+        //then
+        /**
+         * super smart parking boy停车时，1号停车场剩余车位4,可用率80%，2号停车位剩余车位3，可用率100%
+         * 因此停在2号停车场
+         */
+        Assertions.assertEquals(new Integer(1),ticket1.getParkingLotId());
+        Assertions.assertEquals(new Integer(2),ticket2.getParkingLotId());
     }
 
 
