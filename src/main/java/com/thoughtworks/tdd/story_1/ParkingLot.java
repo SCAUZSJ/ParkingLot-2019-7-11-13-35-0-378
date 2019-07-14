@@ -25,8 +25,10 @@ public class ParkingLot {
     }
 
     public Car getCar(int carId) {
-        for(Car car:carList){
-            if(car.getCarId() == carId){
+        for(int i=0;i<carList.size();i++){
+            if(carList.get(i).getCarId() == carId){
+                Car car = carList.get(i);
+                carList.remove(i);
                 return car;
             }
         }

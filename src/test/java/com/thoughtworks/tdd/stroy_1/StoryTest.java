@@ -10,7 +10,9 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class StoryTest {
-
+    /**
+     * 停车时，会得到停车票
+     */
     @Test
     public void should_return_ticket_when_park_a_car() {
         //given
@@ -25,6 +27,9 @@ public class StoryTest {
         Assertions.assertNotNull(ticket);
     }
 
+    /**
+     * 使用停车票，会得到一辆车
+     */
     @Test
     public void should_return_car_when_submit_a_ticket() {
         //given
@@ -38,6 +43,10 @@ public class StoryTest {
         //then
         Assertions.assertNotNull(car);
     }
+
+    /**
+     * 停车场可以停下多辆车
+     */
     @Test
     public void should_return_carCount_when_park_cars() {
         //given
@@ -53,6 +62,10 @@ public class StoryTest {
         //then
         Assertions.assertEquals(2,carList.size());
     }
+
+    /**
+     * 使用停车票可以得到相对应的车
+     */
     @Test
     public void should_return_correct_car_when_submit_a_ticket() {
         //given
@@ -69,6 +82,10 @@ public class StoryTest {
         //then
         Assertions.assertEquals(maserati,car);
     }
+
+    /**
+     *  给错了票，则得不到车
+     */
     @Test
     public void should_return_null_when_submit_error_ticket() {
         //given
@@ -83,6 +100,25 @@ public class StoryTest {
 
         //then
         Assertions.assertNull(car);
+    }
+
+    /**
+     *  票已使用，则得不到车
+     */
+    @Test
+    public void should_return_null_when_ticket_is_invalidity() {
+        //given
+        Car maserati = new Car(200);
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+        //when
+        Ticket maseratiTicket = parkingBoy.parking(maserati);
+        Car car = parkingBoy.redeemCar(maseratiTicket);
+        Car car2 = parkingBoy.redeemCar(maseratiTicket);
+
+        //then
+        Assertions.assertNull(car2);
     }
 
 }
