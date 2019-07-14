@@ -20,10 +20,10 @@ public class ParkingLot {
         return carList;
     }
 
-    public ParkingLot(Integer parkingLotId, List<Car> carList, int max) {
+    public ParkingLot(Integer parkingLotId,int max) {
         this.parkingLotId = parkingLotId;
-        this.carList = carList;
         this.max = max;
+        this.carList = new ArrayList<>();
     }
 
     public void setCarList(List<Car> carList) {

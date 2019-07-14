@@ -258,18 +258,16 @@ public class StoryTest {
     @Test
     public void should_choose_the_best_parking_lot_when_park_the_car() {
         //given
-        List<ParkingLot> parkingLots = new ArrayList<>(Arrays.asList(new ParkingLot(1),new ParkingLot(2),new ParkingLot(3)));
+        List<ParkingLot> parkingLots = new ArrayList<>(Arrays.asList(new ParkingLot(1,2),new ParkingLot(2,5),new ParkingLot(3,10)));
         SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
 
         //when
-        Ticket ticket1 = smartParkingBoy.parking(new Car(1));
-        Ticket ticket2= smartParkingBoy.parking(new Car(2));
-        Ticket ticket3 = smartParkingBoy.parking(new Car(3));
+        Ticket ticket = smartParkingBoy.parking(new Car(1));
+
 
         //then
-        Assertions.assertEquals(new Integer(1),ticket1.getParkingLotId());
-        Assertions.assertEquals(new Integer(2),ticket2.getParkingLotId());
-        Assertions.assertEquals(new Integer(3),ticket3.getParkingLotId());
+        Assertions.assertEquals(new Integer(3),ticket.getParkingLotId());
+
     }
 
 

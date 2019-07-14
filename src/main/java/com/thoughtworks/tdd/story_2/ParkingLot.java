@@ -17,9 +17,9 @@ public class ParkingLot {
         return carList;
     }
 
-    public ParkingLot(List<Car> carList, int max) {
-        this.carList = carList;
+    public ParkingLot(int max) {
         this.max = max;
+        this.carList = new ArrayList<>();
     }
 
     public void setCarList(List<Car> carList) {
