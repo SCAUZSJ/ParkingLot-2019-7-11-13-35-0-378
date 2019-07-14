@@ -4,12 +4,12 @@ import java.util.List;
 
 public class SmartParkingBoy extends ParkingBoy {
 
-    public SmartParkingBoy(ParkingLot parkingLot) {
-        super(parkingLot);
+    public SmartParkingBoy(Integer parkingBoyId ,ParkingLot parkingLot) {
+        super(parkingBoyId,parkingLot);
     }
 
-    public SmartParkingBoy(List<ParkingLot> parkingLots) {
-        super(parkingLots);
+    public SmartParkingBoy(Integer parkingBoyId ,List<ParkingLot> parkingLots) {
+        super(parkingBoyId,parkingLots);
     }
 
     @Override
@@ -30,6 +30,7 @@ public class SmartParkingBoy extends ParkingBoy {
             super.setErrorMsg("Not enough position.");
         }else{
             ticket = parkingLots.get(index).park(car);
+            ticket.setOperatorId(super.getParkingBoyId());
         }
         return ticket;
     }

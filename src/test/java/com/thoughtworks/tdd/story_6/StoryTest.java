@@ -3,6 +3,7 @@ package com.thoughtworks.tdd.story_6;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +18,7 @@ public class StoryTest {
         //given
         Car car = new Car(1);
         ParkingLot parkingLot = new ParkingLot(1);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(1,parkingLot);
 
         //when
         Ticket ticket = parkingBoy.parking(car);
@@ -32,7 +33,7 @@ public class StoryTest {
     public void should_return_car_when_submit_a_ticket() {
         //given
         ParkingLot parkingLot = new ParkingLot(1);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(1,parkingLot);
 
         //when
         Ticket ticket = parkingBoy.parking(new Car(1));
@@ -51,7 +52,7 @@ public class StoryTest {
         Car car1 = new Car(1);
         Car car2 = new Car(2);
         ParkingLot parkingLot = new ParkingLot(1);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(1,parkingLot);
 
         //when
         parkingBoy.parking(car1);
@@ -70,7 +71,7 @@ public class StoryTest {
         Car audi = new Car(100);
         Car maserati = new Car(200);
         ParkingLot parkingLot = new ParkingLot(1);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(1,parkingLot);
 
         //when
         Ticket audiTicket=parkingBoy.parking(audi);
@@ -89,7 +90,7 @@ public class StoryTest {
         //given
         Car maserati = new Car(200);
         ParkingLot parkingLot = new ParkingLot(1);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(1,parkingLot);
 
         //when
         Ticket maseratiTicket = parkingBoy.parking(maserati);
@@ -109,7 +110,7 @@ public class StoryTest {
         Ticket ticket = new Ticket(23);
         ticket.setParkingLotId(1);
         ParkingLot parkingLot = new ParkingLot(1);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(1,parkingLot);
 
         //when
         Ticket maseratiTicket = parkingBoy.parking(maserati);
@@ -127,7 +128,7 @@ public class StoryTest {
         //given
         Car maserati = new Car(200);
         ParkingLot parkingLot = new ParkingLot(1);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(1,parkingLot);
 
         //when
         Ticket maseratiTicket = parkingBoy.parking(maserati);
@@ -145,7 +146,7 @@ public class StoryTest {
     public void should_return_null_when_parking_lot_is_full_of_car() {
         //given
         ParkingLot parkingLot = new ParkingLot(1);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(1,parkingLot);
         for(int i=1;i<=10;i++){
             parkingBoy.parking(new Car(i));
         }
@@ -167,7 +168,7 @@ public class StoryTest {
         Ticket ticket = new Ticket(1);
         ticket.setValidity(false);
         ParkingLot parkingLot = new ParkingLot(1);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(1,parkingLot);
 
         //when
 //        Ticket maseratiTicket = parkingBoy.parking(maserati);
@@ -187,7 +188,7 @@ public class StoryTest {
         Ticket ticket = new Ticket(1);
         ticket.setParkingLotId(1);
         ParkingLot parkingLot = new ParkingLot(1);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(1,parkingLot);
 
         //when
         Ticket maseratiTicket = parkingBoy.parking(maserati);
@@ -204,7 +205,7 @@ public class StoryTest {
     public void should_get_error_msg_when_do_not_submit_ticket() {
         //given
         ParkingLot parkingLot = new ParkingLot(1);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(1,parkingLot);
 
         //when
         parkingBoy.redeemCar(null);
@@ -220,7 +221,7 @@ public class StoryTest {
     public void should_get_error_msg_when_parking_lot_is_full_of_car() {
         //given
         ParkingLot parkingLot = new ParkingLot(1);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(1,parkingLot);
         for(int i=1;i<=10;i++){
             parkingBoy.parking(new Car(i));
         }
@@ -238,7 +239,7 @@ public class StoryTest {
     public void should_park_the_next_parking_lot_when_parking_lot_one_is_full_of_car() {
         //given
         List<ParkingLot> parkingLots = new ArrayList<>(Arrays.asList(new ParkingLot(1),new ParkingLot(2)));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        ParkingBoy parkingBoy = new ParkingBoy(1,parkingLots);
         for(int i=1;i<=10;i++){
             parkingBoy.parking(new Car(i));
         }
@@ -257,7 +258,7 @@ public class StoryTest {
     public void should_choose_the_best_parking_lot_when_park_the_car() {
         //given
         List<ParkingLot> parkingLots = new ArrayList<>(Arrays.asList(new ParkingLot(1,2),new ParkingLot(2,5),new ParkingLot(3,10)));
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(1,parkingLots);
         //when
         Ticket ticket = smartParkingBoy.parking(new Car(1));
         //then
@@ -273,8 +274,8 @@ public class StoryTest {
         ParkingLot parkingLot1 = new ParkingLot(1,5);
         ParkingLot parkingLot2 = new ParkingLot(2,3);
         List<ParkingLot> parkingLots = new ArrayList<>(Arrays.asList(parkingLot1,parkingLot2));
-        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLots); //super 管理2个停车场
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot1); //普通男孩管理1
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(1,parkingLots); //super 管理2个停车场
+        ParkingBoy parkingBoy = new ParkingBoy(1,parkingLot1); //普通男孩管理1
 
         //when
         Ticket ticket1 = parkingBoy.parking(new Car(1));
@@ -296,7 +297,7 @@ public class StoryTest {
     public void should_return_ticket_when_manager_store_car_in_his_own_parking_lot() {
         //given
         ParkingLot parkingLot = new ParkingLot(1,5);
-        ServiceManager serviceManager = new ServiceManager(parkingLot,null);//没手下
+        ServiceManager serviceManager = new ServiceManager(1,parkingLot,null);//没手下
         Car car = new Car(1);
 
         //when
@@ -313,14 +314,55 @@ public class StoryTest {
     public void should_return_car_when_manager_fetch_car_in_his_own_parking_lot() {
         //given
         ParkingLot parkingLot = new ParkingLot(1,5);
-        ServiceManager serviceManager = new ServiceManager(parkingLot,null);//没手下
-
+        ServiceManager serviceManager = new ServiceManager(1,parkingLot,null);//没手下
+        Car car = new Car(1);
         //when
-        Ticket ticket = serviceManager.parking(new Car(1));
-        Car car = serviceManager.redeemCar(ticket);
+        Ticket ticket = serviceManager.parking(car);
+        Car newCar = serviceManager.redeemCar(ticket);
         //then
 
-        Assertions.assertEquals(ticket.getCarId(),car.getCarId());
+        Assertions.assertEquals(car,newCar);
+    }
+
+    /**
+     *  service manager 可以指定某个泊车男孩去停车
+     */
+    @Test
+    public void should_return_ticket_when_manager_specify_a_parking_boy_to_store() {
+        //given
+        ParkingLot parkingLot = new ParkingLot(1,5);
+        ParkingBoy parkingBoy =new ParkingBoy(1,parkingLot);
+
+        List<ParkingBoy> parkingBoys = new ArrayList<>();
+        parkingBoys.add(parkingBoy);
+        ServiceManager serviceManager = new ServiceManager(1,(ParkingLot) null,parkingBoys);//管理着parkingBoy
+
+        //when
+        Ticket ticket = serviceManager.parking(new Integer(1),new Car(1));//让id为1的boy去停车
+        //then
+
+        Assertions.assertEquals(new Integer(1),ticket.getOperatorId()); //停车人的id与预期相符
+    }
+
+    /**
+     *  service manager 可以指定某个泊车男孩去停车
+     */
+    @Test
+    public void should_return_car_when_manager_specify_a_parking_boy_to_fetch() {
+        //given
+        ParkingLot parkingLot = new ParkingLot(1,5);
+        ParkingBoy parkingBoy =new ParkingBoy(1,parkingLot);
+
+        List<ParkingBoy> parkingBoys = new ArrayList<>();
+        parkingBoys.add(parkingBoy);
+        ServiceManager serviceManager = new ServiceManager(1,parkingLot,parkingBoys);//管理着parkingBoy
+        Car car = new Car(1);
+        //when
+        Ticket ticket = serviceManager.parking(car);
+        Car newCar = (Car) serviceManager.redeemCar(new Integer(1),ticket);//让id为1的boy去取车
+        //then
+
+        Assertions.assertEquals(car,newCar); //取到之前停的车
     }
 
 

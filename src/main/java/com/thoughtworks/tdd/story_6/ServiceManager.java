@@ -7,17 +7,17 @@ public class ServiceManager extends ParkingBoy {
 
     private List<ParkingBoy> parkingBoys = new ArrayList<>();
 
-    public ServiceManager(List<ParkingBoy> parkingBoys) {
+    public ServiceManager(Integer parkingBoyId,List<ParkingBoy> parkingBoys) {
         this.parkingBoys = parkingBoys;
     }
 
-    public ServiceManager(ParkingLot parkingLot, List<ParkingBoy> parkingBoys) {
-        super(parkingLot);
+    public ServiceManager(Integer parkingBoyId,ParkingLot parkingLot, List<ParkingBoy> parkingBoys) {
+        super(parkingBoyId,parkingLot);
         this.parkingBoys = parkingBoys;
     }
 
-    public ServiceManager(List<ParkingLot> parkingLots, List<ParkingBoy> parkingBoys) {
-        super(parkingLots);
+    public ServiceManager(Integer parkingBoyId ,List<ParkingLot> parkingLots, List<ParkingBoy> parkingBoys) {
+        super(parkingBoyId,parkingLots);
         this.parkingBoys = parkingBoys;
     }
 
@@ -25,24 +25,44 @@ public class ServiceManager extends ParkingBoy {
         this.parkingBoys.add(parkingBoy);
     }
 
-    //overload
-    public Ticket parking(ParkingBoy parkingBoy,Car car) {
-        if(parkingBoy!=null) {
-            Ticket ticket = parkingBoy.parking(car);
-            if(ticket == null){
-                super.setErrorMsg(parkingBoy.getErrorMsg());
+    public ParkingBoy getSpecifyParkingBoy(Integer parkingBoyId){
+        ParkingBoy parkingBoy =null;
+        for(ParkingBoy pb : this.parkingBoys){
+            if(pb.getParkingBoyId().equals(parkingBoyId)){
+                parkingBoy = pb;
+                break;
             }
         }
-        return super.parking(car);
+        return parkingBoy;
+    }
+
+    //overload
+    public Ticket parking(Integer parkingBoyId,Car car) {
+        Ticket ticket =null;
+        if(parkingBoyId!=null) {
+            ParkingBoy parkingBoy = getSpecifyParkingBoy(parkingBoyId);
+            if(parkingBoy!=null){
+                 ticket = parkingBoy.parking(car);
+                if(ticket == null){
+                    super.setErrorMsg(parkingBoy.getErrorMsg());
+                }
+            }
+
+        }
+        return ticket;
     }
     //overload
-    public Car redeemCar(ParkingBoy parkingBoy,Ticket ticket) {
-        if(parkingBoy!=null){
-            Car car = parkingBoy.redeemCar(ticket);
-            if(car == null){
-                super.setErrorMsg(parkingBoy.getErrorMsg());
+    public Car redeemCar(Integer parkingBoyId,Ticket ticket) {
+        Car car = null;
+        if(parkingBoyId!=null){
+            ParkingBoy parkingBoy = getSpecifyParkingBoy(parkingBoyId);
+            if(parkingBoy!=null){
+                car = parkingBoy.redeemCar(ticket);
+                if(car == null){
+                    super.setErrorMsg(parkingBoy.getErrorMsg());
+                }
             }
         }
-        return super.redeemCar(ticket);
+        return car;
     }
 }
