@@ -1,4 +1,4 @@
-package com.thoughtworks.tdd.story_1;
+package com.thoughtworks.tdd.story_2;
 
 public class ParkingBoy {
 

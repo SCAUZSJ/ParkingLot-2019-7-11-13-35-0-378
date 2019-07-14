@@ -1,4 +1,4 @@
-package com.thoughtworks.tdd.story_1;
+package com.thoughtworks.tdd.story_2;
 
 import java.util.ArrayList;
 import java.util.List;

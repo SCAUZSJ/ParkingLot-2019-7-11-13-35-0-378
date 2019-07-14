@@ -1,9 +1,9 @@
-package com.thoughtworks.tdd.stroy_1;
+package com.thoughtworks.tdd.story_2;
 
-import com.thoughtworks.tdd.story_1.Car;
-import com.thoughtworks.tdd.story_1.ParkingBoy;
-import com.thoughtworks.tdd.story_1.ParkingLot;
-import com.thoughtworks.tdd.story_1.Ticket;
+import com.thoughtworks.tdd.story_2.Car;
+import com.thoughtworks.tdd.story_2.ParkingBoy;
+import com.thoughtworks.tdd.story_2.ParkingLot;
+import com.thoughtworks.tdd.story_2.Ticket;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,17 +13,17 @@ import java.util.List;
 public class StoryTest {
     /**
      * 停车时，会得到停车票
+     *
      */
     @Test
     public void should_return_ticket_when_park_a_car() {
         //given
-        Car car = new Car();
+        Car car = new Car(1);
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
         //when
         Ticket ticket = parkingBoy.parking(car);
-
         //then
         Assertions.assertNotNull(ticket);
     }
@@ -34,11 +34,11 @@ public class StoryTest {
     @Test
     public void should_return_car_when_submit_a_ticket() {
         //given
-        Ticket ticket = new Ticket();
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
         //when
+        Ticket ticket = parkingBoy.parking(new Car(1));
         Car car = parkingBoy.redeemCar(ticket);
 
         //then
@@ -158,5 +158,7 @@ public class StoryTest {
         //then
         Assertions.assertNull(ticket);
     }
+
+
 
 }

@@ -1,8 +1,9 @@
-package com.thoughtworks.tdd.story_1;
+package com.thoughtworks.tdd.story_2;
 
 public class Ticket {
     private Integer carId;
     private boolean validity;//true 为 有效，false 为无效（已使用）
+    private String remark;
 
     public Ticket(){
         this.validity = true;
@@ -26,5 +27,13 @@ public class Ticket {
 
     public void setValidity(boolean validity) {
         validity = validity;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }
