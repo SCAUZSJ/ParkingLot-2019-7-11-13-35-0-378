@@ -22,4 +22,18 @@ public class StoryTest {
         //then
         Assertions.assertNotNull(ticket);
     }
+
+    @Test
+    public void should_return_car_when_submit_a_ticket() {
+        //given
+        Ticket ticket = new Ticket();
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+        //when
+        Car car = parkingBoy.redeemCar(ticket);
+
+        //then
+        Assertions.assertNotNull(car);
+    }
 }

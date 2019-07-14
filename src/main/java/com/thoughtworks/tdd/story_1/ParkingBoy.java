@@ -23,6 +23,9 @@ public class ParkingBoy {
     public Ticket parking(Car car){
         return parkingLot.park(car);
     }
+    public Car redeemCar(Ticket ticket){
+        return parkingLot.getCar();
+    }
 
 
 }
