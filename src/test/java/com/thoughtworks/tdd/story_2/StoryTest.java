@@ -163,7 +163,7 @@ public class StoryTest {
      *  给已使用票,能询问到错误原因
      */
     @Test
-    public void should_return_error_msg_when_ticket_is_invalidity() {
+    public void should_get_error_msg_when_ticket_is_invalidity() {
         //given
 //        Car maserati = new Car(200);
         Ticket ticket = new Ticket(1);
@@ -183,7 +183,7 @@ public class StoryTest {
      *  给泊车人没提供的票,能询问到错误原因
      */
     @Test
-    public void should_return_error_msg_when_ticket_is_not_provide() {
+    public void should_get_error_msg_when_ticket_is_not_provide() {
         //given
         Car maserati = new Car(200);
         Ticket ticket = new Ticket(1);
@@ -202,7 +202,7 @@ public class StoryTest {
      *  没给票,能询问到错误原因
      */
     @Test
-    public void should_return_error_msg_when_do_not_submit_ticket() {
+    public void should_get_error_msg_when_do_not_submit_ticket() {
         //given
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
@@ -214,5 +214,23 @@ public class StoryTest {
         Assertions.assertEquals("Please provide your parking ticket.",parkingBoy.getErrorMsg());
     }
 
+    /**
+     *  停车场停满车（10辆）,能询问到错误原因
+     */
+    @Test
+    public void should_get_error_msg_when_parking_lot_is_full_of_car() {
+        //given
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        for(int i=1;i<=10;i++){
+            parkingBoy.parking(new Car(i));
+        }
+        Car car11 = new Car(11);
+
+        //when
+        parkingBoy.parking(car11);
+        //then
+        Assertions.assertEquals("Not enough position.",parkingBoy.getErrorMsg());
+    }
 
 }

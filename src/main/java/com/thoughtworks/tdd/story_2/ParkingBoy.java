@@ -23,7 +23,11 @@ public class ParkingBoy {
 
     public Ticket parking(Car car){
         if(car.getCarId()==null) return null;
-        return parkingLot.park(car);
+        Ticket ticket = parkingLot.park(car);
+        if(ticket == null){
+            this.errorMsg = "Not enough position.";
+        }
+        return ticket;
     }
     public Car redeemCar(Ticket ticket){
 
