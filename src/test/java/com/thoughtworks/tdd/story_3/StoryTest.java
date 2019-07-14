@@ -108,6 +108,7 @@ public class StoryTest {
         //given
         Car maserati = new Car(200);
         Ticket ticket = new Ticket(23);
+        ticket.setParkingLotId(1);
         ParkingLot parkingLot = new ParkingLot(1);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
@@ -185,6 +186,7 @@ public class StoryTest {
         //given
         Car maserati = new Car(200);
         Ticket ticket = new Ticket(1);
+        ticket.setParkingLotId(1);
         ParkingLot parkingLot = new ParkingLot(1);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 

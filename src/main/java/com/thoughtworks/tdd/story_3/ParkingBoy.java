@@ -1,10 +1,11 @@
 package com.thoughtworks.tdd.story_3;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingBoy {
 
-    private List<ParkingLot> parkingLots;
+    private List<ParkingLot> parkingLots = new ArrayList<>();
     private String errorMsg;
 
     public ParkingBoy() {
