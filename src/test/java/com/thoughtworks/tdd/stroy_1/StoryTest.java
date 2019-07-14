@@ -7,6 +7,8 @@ import com.thoughtworks.tdd.story_1.Ticket;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class StoryTest {
 
     @Test
@@ -35,5 +37,20 @@ public class StoryTest {
 
         //then
         Assertions.assertNotNull(car);
+    }
+    @Test
+    public void should_return_carCount_when_park_cars() {
+        //given
+        Car car1 = new Car();
+        Car car2 = new Car();
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+        //when
+        parkingBoy.parking(car1);
+        parkingBoy.parking(car2);
+        List<Car> carList = parkingLot.getCarList();
+        //then
+        Assertions.assertEquals(2,carList.size());
     }
 }
