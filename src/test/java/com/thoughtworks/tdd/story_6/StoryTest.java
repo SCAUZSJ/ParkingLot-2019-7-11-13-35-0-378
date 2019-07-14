@@ -306,6 +306,23 @@ public class StoryTest {
         Assertions.assertEquals(new Integer(1),ticket.getParkingLotId());
     }
 
+    /**
+     *  service manager 可以自己在自己的停车场 取车
+     */
+    @Test
+    public void should_return_car_when_manager_fetch_car_in_his_own_parking_lot() {
+        //given
+        ParkingLot parkingLot = new ParkingLot(1,5);
+        ServiceManager serviceManager = new ServiceManager(parkingLot,null);//没手下
+
+        //when
+        Ticket ticket = serviceManager.parking(new Car(1));
+        Car car = serviceManager.redeemCar(ticket);
+        //then
+
+        Assertions.assertEquals(ticket.getCarId(),car.getCarId());
+    }
+
 
 
 }
