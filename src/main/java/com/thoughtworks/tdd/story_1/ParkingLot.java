@@ -5,7 +5,9 @@ import java.util.List;
 
 public class ParkingLot {
 
-    List<Car> carList;
+
+    private List<Car> carList;
+    private int max=10;
 
     public ParkingLot() {
         carList = new ArrayList<>();
@@ -15,11 +17,20 @@ public class ParkingLot {
         return carList;
     }
 
+    public ParkingLot(List<Car> carList, int max) {
+        this.carList = carList;
+        this.max = max;
+    }
+
     public void setCarList(List<Car> carList) {
         this.carList = carList;
     }
 
+
     public Ticket park(Car car){
+        if(this.carList.size()>=this.max){
+            return null;
+        }
         this.carList.add(car);
         return new Ticket(car.getCarId());
     }

@@ -7,6 +7,7 @@ import com.thoughtworks.tdd.story_1.Ticket;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StoryTest {
@@ -137,6 +138,25 @@ public class StoryTest {
 
         //then
         Assertions.assertNull(car2);
+    }
+
+    /**
+     *  停车场停满车（10辆）,则无法再停车
+     */
+    @Test
+    public void should_return_null_when_parking_lot_is_full_of_car() {
+        //given
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        for(int i=1;i<=10;i++){
+            parkingBoy.parking(new Car(i));
+        }
+        Car car11 = new Car(11);
+
+        //when
+        Ticket ticket = parkingBoy.parking(car11);
+        //then
+        Assertions.assertNull(ticket);
     }
 
 }
