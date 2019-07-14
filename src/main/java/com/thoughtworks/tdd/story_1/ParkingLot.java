@@ -21,10 +21,15 @@ public class ParkingLot {
 
     public Ticket park(Car car){
         this.carList.add(car);
-        return new Ticket();
+        return new Ticket(car.getCarId());
     }
 
-    public Car getCar() {
-        return new Car();
+    public Car getCar(int carId) {
+        for(Car car:carList){
+            if(car.getCarId() == carId){
+                return car;
+            }
+        }
+        return null;
     }
 }

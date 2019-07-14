@@ -53,5 +53,20 @@ public class StoryTest {
         //then
         Assertions.assertEquals(2,carList.size());
     }
+    @Test
+    public void should_return_correct_car_when_submit_a_ticket() {
+        //given
+        Car audi = new Car(100);
+        Car maserati = new Car(200);
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
+        //when
+        Ticket audiTicket=parkingBoy.parking(audi);
+        Ticket maseratiTicket = parkingBoy.parking(maserati);
+        Car car = parkingBoy.redeemCar(maseratiTicket);
+
+        //then
+        Assertions.assertEquals(maserati,car);
+    }
 }
