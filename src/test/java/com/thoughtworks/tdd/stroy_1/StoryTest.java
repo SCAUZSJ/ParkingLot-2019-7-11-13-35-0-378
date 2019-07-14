@@ -69,4 +69,20 @@ public class StoryTest {
         //then
         Assertions.assertEquals(maserati,car);
     }
+    @Test
+    public void should_return_null_when_submit_error_ticket() {
+        //given
+        Car maserati = new Car(200);
+        Ticket ticket = new Ticket(23);
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+        //when
+        Ticket maseratiTicket = parkingBoy.parking(maserati);
+        Car car = parkingBoy.redeemCar(ticket);
+
+        //then
+        Assertions.assertNull(car);
+    }
+
 }
