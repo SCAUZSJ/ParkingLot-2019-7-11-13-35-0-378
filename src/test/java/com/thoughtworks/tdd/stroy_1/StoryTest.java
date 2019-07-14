@@ -84,6 +84,24 @@ public class StoryTest {
     }
 
     /**
+     *  没有给票，则得不到车
+     */
+    @Test
+    public void should_return_null_when_do_not_submit_ticket() {
+        //given
+        Car maserati = new Car(200);
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+        //when
+        Ticket maseratiTicket = parkingBoy.parking(maserati);
+        Car car = parkingBoy.redeemCar(null);
+
+        //then
+        Assertions.assertNull(car);
+    }
+
+    /**
      *  给错了票，则得不到车
      */
     @Test
