@@ -1,8 +1,13 @@
 package com.thoughtworks.tdd.story_5;
 
-import java.util.List;
+import com.thoughtworks.tdd.Enum.FeedBack;
+import com.thoughtworks.tdd.story_5.Interface.ParkingPerson;
 
-public class SmartParkingBoy extends ParkingBoy {
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class SmartParkingBoy extends ParkingBoy implements ParkingPerson {
 
     public SmartParkingBoy(ParkingLot parkingLot) {
         super(parkingLot);
@@ -16,21 +21,24 @@ public class SmartParkingBoy extends ParkingBoy {
     public Ticket parking(Car car) {
         if(car.getCarId()==null) return null;
         Ticket ticket = null;
-        List<ParkingLot> parkingLots = super.getParkingLots();
-        int index = -1;
-        int remainCount=0;
-        for(int i=0;i<parkingLots.size();i++){
-            int count = parkingLots.get(i).getMax()-parkingLots.get(i).getCarList().size();
-            if(count>remainCount){
-                index = i;
-                remainCount = count;
-            }
-        }
-        if(remainCount==0){
-            super.setErrorMsg("Not enough position.");
+        ParkingLot parkingLot = chooseParkingLot();
+
+        if(parkingLot==null){
+            super.setServiceFeedBack(FeedBack.NotEnoughPosition.getMessage());
         }else{
-            ticket = parkingLots.get(index).park(car);
+            ticket = parkingLot.park(car);
         }
         return ticket;
+    }
+    @Override
+    public ParkingLot chooseParkingLot() {
+        List<ParkingLot> parkingLots = super.getParkingLots();
+        List<ParkingLot> parkingLotList = parkingLots.stream().filter((pl)->{
+            return pl.getMax()-pl.getCarList().size()>0;
+        }).sorted(Comparator.comparing(pl->pl.getMax()-pl.getCarList().size())).collect(Collectors.toList());
+        if(parkingLotList.size()>0){
+            return parkingLotList.get(parkingLotList.size()-1);
+        }
+        return null;
     }
 }

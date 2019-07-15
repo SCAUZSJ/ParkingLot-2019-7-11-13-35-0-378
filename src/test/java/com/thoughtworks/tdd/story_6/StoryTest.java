@@ -3,7 +3,6 @@ package com.thoughtworks.tdd.story_6;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -175,7 +174,7 @@ public class StoryTest {
         parkingBoy.redeemCar(ticket);
 
         //then
-        Assertions.assertEquals("Unrecognized parking ticket.",parkingBoy.getErrorMsg());
+        Assertions.assertEquals("Unrecognized parking ticket.",parkingBoy.getServiceFeedBack());
     }
 
     /**
@@ -195,7 +194,7 @@ public class StoryTest {
         parkingBoy.redeemCar(ticket);
 
         //then
-        Assertions.assertEquals("Unrecognized parking ticket.",parkingBoy.getErrorMsg());
+        Assertions.assertEquals("Unrecognized parking ticket.",parkingBoy.getServiceFeedBack());
     }
 
     /**
@@ -211,7 +210,7 @@ public class StoryTest {
         parkingBoy.redeemCar(null);
 
         //then
-        Assertions.assertEquals("Please provide your parking ticket.",parkingBoy.getErrorMsg());
+        Assertions.assertEquals("Please provide your parking ticket.",parkingBoy.getServiceFeedBack());
     }
 
     /**
@@ -230,7 +229,7 @@ public class StoryTest {
         //when
         parkingBoy.parking(car11);
         //then
-        Assertions.assertEquals("Not enough position.",parkingBoy.getErrorMsg());
+        Assertions.assertEquals("Not enough position.",parkingBoy.getServiceFeedBack());
     }
     /**
      *  停车场1停满车（10辆）,停车场2未停满，则停到停车场2
@@ -382,7 +381,7 @@ public class StoryTest {
         Ticket ticket = serviceManager.parking(1,new Car(1));//让id为1的boy去停车
         //then
 
-        Assertions.assertEquals("Not enough position.",serviceManager.getErrorMsg());
+        Assertions.assertEquals("Not enough position.",serviceManager.getServiceFeedBack());
     }
 
     /**
@@ -405,7 +404,7 @@ public class StoryTest {
         Car newCar = (Car) serviceManager.redeemCar(1,ticket);//让1号boy去取2车，错误的票
         //then
 
-        Assertions.assertEquals("Unrecognized parking ticket.",serviceManager.getErrorMsg()); //取到之前停的车
+        Assertions.assertEquals("Unrecognized parking ticket.",serviceManager.getServiceFeedBack()); //取到之前停的车
     }
 
 

@@ -176,7 +176,7 @@ public class StoryTest {
         parkingBoy.redeemCar(ticket);
 
         //then
-        Assertions.assertEquals("Unrecognized parking ticket.",parkingBoy.getErrorMsg());
+        Assertions.assertEquals("Unrecognized parking ticket.",parkingBoy.getServiceFeedBack());
     }
 
     /**
@@ -196,7 +196,7 @@ public class StoryTest {
         parkingBoy.redeemCar(ticket);
 
         //then
-        Assertions.assertEquals("Unrecognized parking ticket.",parkingBoy.getErrorMsg());
+        Assertions.assertEquals("Unrecognized parking ticket.",parkingBoy.getServiceFeedBack());
     }
 
     /**
@@ -212,7 +212,7 @@ public class StoryTest {
         parkingBoy.redeemCar(null);
 
         //then
-        Assertions.assertEquals("Please provide your parking ticket.",parkingBoy.getErrorMsg());
+        Assertions.assertEquals("Please provide your parking ticket.",parkingBoy.getServiceFeedBack());
     }
 
     /**
@@ -231,7 +231,7 @@ public class StoryTest {
         //when
         parkingBoy.parking(car11);
         //then
-        Assertions.assertEquals("Not enough position.",parkingBoy.getErrorMsg());
+        Assertions.assertEquals("Not enough position.",parkingBoy.getServiceFeedBack());
     }
     /**
      *  停车场1停满车（10辆）,停车场2未停满，则停到停车场2

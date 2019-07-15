@@ -3,7 +3,6 @@ package com.thoughtworks.tdd.story_2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StoryTest {
@@ -172,7 +171,7 @@ public class StoryTest {
         parkingBoy.redeemCar(ticket);
 
         //then
-        Assertions.assertEquals("Unrecognized parking ticket.",parkingBoy.getErrorMsg());
+        Assertions.assertEquals("Unrecognized parking ticket.",parkingBoy.getServiceFeedBack());
     }
 
     /**
@@ -191,7 +190,7 @@ public class StoryTest {
         parkingBoy.redeemCar(ticket);
 
         //then
-        Assertions.assertEquals("Unrecognized parking ticket.",parkingBoy.getErrorMsg());
+        Assertions.assertEquals("Unrecognized parking ticket.",parkingBoy.getServiceFeedBack());
     }
 
     /**
@@ -207,7 +206,7 @@ public class StoryTest {
         parkingBoy.redeemCar(null);
 
         //then
-        Assertions.assertEquals("Please provide your parking ticket.",parkingBoy.getErrorMsg());
+        Assertions.assertEquals("Please provide your parking ticket.",parkingBoy.getServiceFeedBack());
     }
 
     /**
@@ -226,7 +225,7 @@ public class StoryTest {
         //when
         parkingBoy.parking(car11);
         //then
-        Assertions.assertEquals("Not enough position.",parkingBoy.getErrorMsg());
+        Assertions.assertEquals("Not enough position.",parkingBoy.getServiceFeedBack());
     }
 
 }

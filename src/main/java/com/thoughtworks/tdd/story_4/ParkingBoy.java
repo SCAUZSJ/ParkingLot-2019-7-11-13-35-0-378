@@ -1,12 +1,17 @@
 package com.thoughtworks.tdd.story_4;
 
+import com.thoughtworks.tdd.Enum.FeedBack;
+import com.thoughtworks.tdd.story_4.Interface.ParkingPerson;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
-public class ParkingBoy {
+public class ParkingBoy implements ParkingPerson {
 
     private List<ParkingLot> parkingLots = new ArrayList<>();
-    private String errorMsg;
+    private String serviceFeedBack;
 
     public ParkingBoy() {
 
@@ -28,13 +33,13 @@ public class ParkingBoy {
 
     public Ticket parking(Car car){
         if(car.getCarId()==null) return null;
-        Ticket ticket = null;
-        for(int i=0;i<parkingLots.size();i++){
-            ticket = parkingLots.get(i).park(car);
-            if(ticket !=null) break;;
+        ParkingLot parkingLot =chooseParkingLot();
+        Ticket ticket =null;
+        if(parkingLot!=null){
+            ticket = parkingLot.park(car);
         }
         if(ticket == null){
-            this.errorMsg = "Not enough position.";
+            this.serviceFeedBack = FeedBack.NotEnoughPosition.getMessage();
         }
         return ticket;
     }
@@ -42,11 +47,11 @@ public class ParkingBoy {
 
         System.out.println(ticket);
         if(ticket == null) {
-            this.errorMsg="Please provide your parking ticket.";
+            this.serviceFeedBack =FeedBack.PleaseProvide.getMessage();
             return null;
         }
         if(!ticket.getValidity()){
-            this.errorMsg="Unrecognized parking ticket.";
+            this.serviceFeedBack =FeedBack.UnrecognizedTicket.getMessage();
             return null;
         }
         Car car = null;
@@ -57,18 +62,29 @@ public class ParkingBoy {
             }
         }
         if(car == null){
-            this.errorMsg="Unrecognized parking ticket.";
+            this.serviceFeedBack = FeedBack.UnrecognizedTicket.getMessage();
         }
         return car;
     }
 
-
-    public String getErrorMsg() {
-        return errorMsg;
+    @Override
+    public ParkingLot chooseParkingLot() {
+        List<ParkingLot> parkingLots = this.parkingLots.stream().filter((pl)->{
+            return pl.getCarList().size()<pl.getMax();
+        }).collect(Collectors.toList());
+        if(parkingLots.size()>0){
+            return parkingLots.get(0);
+        }
+        return null;
     }
 
-    public void setErrorMsg(String errorMsg) {
-        this.errorMsg = errorMsg;
+
+    public String getServiceFeedBack() {
+        return serviceFeedBack;
+    }
+
+    public void setServiceFeedBack(String serviceFeedBack) {
+        this.serviceFeedBack = serviceFeedBack;
     }
 
 

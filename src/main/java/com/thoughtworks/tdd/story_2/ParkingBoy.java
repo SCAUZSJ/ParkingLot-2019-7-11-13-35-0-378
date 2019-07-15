@@ -1,9 +1,11 @@
 package com.thoughtworks.tdd.story_2;
 
+import com.thoughtworks.tdd.Enum.FeedBack;
+
 public class ParkingBoy {
 
     private ParkingLot parkingLot;
-    private String errorMsg;
+    private String serviceFeedBack;
 
     public ParkingBoy() {
 
@@ -25,7 +27,7 @@ public class ParkingBoy {
         if(car.getCarId()==null) return null;
         Ticket ticket = parkingLot.park(car);
         if(ticket == null){
-            this.errorMsg = "Not enough position.";
+            this.serviceFeedBack = FeedBack.NotEnoughPosition.getMessage();
         }
         return ticket;
     }
@@ -33,26 +35,26 @@ public class ParkingBoy {
 
         System.out.println(ticket);
         if(ticket == null) {
-            this.errorMsg="Please provide your parking ticket.";
+            this.serviceFeedBack =FeedBack.PleaseProvide.getMessage();
             return null;
         }
         if(!ticket.getValidity()){
-            this.errorMsg="Unrecognized parking ticket.";
+            this.serviceFeedBack =FeedBack.UnrecognizedTicket.getMessage();
             return null;
         }
         Car car = parkingLot.getCar(ticket.getCarId());
         if(car == null){
-            this.errorMsg="Unrecognized parking ticket.";
+            this.serviceFeedBack =FeedBack.UnrecognizedTicket.getMessage();
         }
         return car;
     }
 
 
-    public String getErrorMsg() {
-        return errorMsg;
+    public String getServiceFeedBack() {
+        return serviceFeedBack;
     }
 
-    public void setErrorMsg(String errorMsg) {
-        this.errorMsg = errorMsg;
+    public void setServiceFeedBack(String serviceFeedBack) {
+        this.serviceFeedBack = serviceFeedBack;
     }
 }
