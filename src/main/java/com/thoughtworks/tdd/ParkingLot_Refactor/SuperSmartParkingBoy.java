@@ -1,13 +1,16 @@
-package com.thoughtworks.tdd.story_6;
+package com.thoughtworks.tdd.ParkingLot_Refactor;
 
 import com.thoughtworks.tdd.Enum.FeedBack;
-import com.thoughtworks.tdd.story_6.Interface.ParkingPerson;
+import com.thoughtworks.tdd.ParkingLot_Refactor.Interface.ParkingPerson;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SuperSmartParkingBoy extends ParkingBoy  {
+public class SuperSmartParkingBoy extends ParkingBoy implements ParkingPerson {
+    public SuperSmartParkingBoy(Integer parkingBoyId , ParkingLot parkingLot) {
+        super(parkingBoyId,parkingLot);
+    }
 
     public SuperSmartParkingBoy(Integer parkingBoyId ,List<ParkingLot> parkingLots) {
         super(parkingBoyId,parkingLots);
