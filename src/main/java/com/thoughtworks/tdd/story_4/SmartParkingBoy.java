@@ -5,7 +5,6 @@ import com.thoughtworks.tdd.story_4.Interface.ParkingPerson;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class SmartParkingBoy extends ParkingBoy implements ParkingPerson {
@@ -36,8 +35,8 @@ public class SmartParkingBoy extends ParkingBoy implements ParkingPerson {
     public ParkingLot chooseParkingLot() {
         List<ParkingLot> parkingLots = super.getParkingLots();
         List<ParkingLot> parkingLotList = parkingLots.stream().filter((pl)->{
-            return pl.getMax()-pl.getCarList().size()>0;
-        }).sorted(Comparator.comparing(pl->pl.getMax()-pl.getCarList().size())).collect(Collectors.toList());
+            return pl.getCapacity()-pl.getCarList().size()>0;
+        }).sorted(Comparator.comparing(pl->pl.getCapacity()-pl.getCarList().size())).collect(Collectors.toList());
         if(parkingLotList.size()>0){
             return parkingLotList.get(parkingLotList.size()-1);
         }

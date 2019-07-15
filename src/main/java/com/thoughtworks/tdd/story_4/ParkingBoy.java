@@ -5,7 +5,6 @@ import com.thoughtworks.tdd.story_4.Interface.ParkingPerson;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class ParkingBoy implements ParkingPerson {
@@ -70,7 +69,7 @@ public class ParkingBoy implements ParkingPerson {
     @Override
     public ParkingLot chooseParkingLot() {
         List<ParkingLot> parkingLots = this.parkingLots.stream().filter((pl)->{
-            return pl.getCarList().size()<pl.getMax();
+            return pl.getCarList().size()<pl.getCapacity();
         }).collect(Collectors.toList());
         if(parkingLots.size()>0){
             return parkingLots.get(0);

@@ -8,7 +8,7 @@ public class ParkingLot {
 
     private Integer parkingLotId;
     private List<Car> carList;
-    private int max=10;
+    private int capacity =10;
 
 
     public ParkingLot(Integer parkingLotId) {
@@ -20,9 +20,9 @@ public class ParkingLot {
         return carList;
     }
 
-    public ParkingLot(Integer parkingLotId,int max) {
+    public ParkingLot(Integer parkingLotId,int capacity) {
         this.parkingLotId = parkingLotId;
-        this.max = max;
+        this.capacity = capacity;
         this.carList = new ArrayList<>();
     }
 
@@ -32,7 +32,7 @@ public class ParkingLot {
 
 
     public Ticket park(Car car){
-        if(this.carList.size()>=this.max){
+        if(this.carList.size()>=this.capacity){
             return null;
         }
         this.carList.add(car);
@@ -59,11 +59,11 @@ public class ParkingLot {
     public void setParkingLotId(Integer parkingLotId) {
         this.parkingLotId = parkingLotId;
     }
-    public int getMax() {
-        return max;
+    public int getCapacity() {
+        return capacity;
     }
 
-    public void setMax(int max) {
-        this.max = max;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 }

@@ -69,7 +69,7 @@ public class ParkingBoy implements ParkingPerson {
     @Override
     public ParkingLot chooseParkingLot() {
         List<ParkingLot> parkingLots = this.parkingLots.stream().filter((pl)->{
-            return pl.getCarList().size()<pl.getMax();
+            return pl.getCarList().size()<pl.getCapacity();
         }).collect(Collectors.toList());
         if(parkingLots.size()>0){
             return parkingLots.get(0);

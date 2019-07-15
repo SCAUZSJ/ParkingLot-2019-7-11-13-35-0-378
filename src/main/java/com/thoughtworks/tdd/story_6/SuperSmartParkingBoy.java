@@ -35,8 +35,8 @@ public class SuperSmartParkingBoy extends ParkingBoy implements ParkingPerson {
     public ParkingLot chooseParkingLot() {
         List<ParkingLot> parkingLots = super.getParkingLots();
         List<ParkingLot> parkingLotList = parkingLots.stream().filter((pl)->{
-            return pl.getMax()-pl.getCarList().size()>0;
-        }).sorted(Comparator.comparing(pl->1-(pl.getCarList().size()/pl.getMax()))).collect(Collectors.toList());
+            return pl.getCapacity()-pl.getCarList().size()>0;
+        }).sorted(Comparator.comparing(pl->1-(pl.getCarList().size()/pl.getCapacity()))).collect(Collectors.toList());
         if(parkingLotList.size()>0){
             return parkingLotList.get(parkingLotList.size()-1);
         }
