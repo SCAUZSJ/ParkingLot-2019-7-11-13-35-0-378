@@ -4,7 +4,6 @@ public class Ticket {
     private Integer carId;
     private Integer parkingLotId;
     private boolean validity;//true 为 有效，false 为无效（已使用）
-    private String remark;
     private Integer operatorId;
 
     public Ticket(){
@@ -29,14 +28,6 @@ public class Ticket {
 
     public void setValidity(boolean validity) {
         this.validity = validity;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
     }
 
     public Integer getParkingLotId() {

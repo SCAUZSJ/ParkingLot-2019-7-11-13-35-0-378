@@ -12,6 +12,6 @@ import java.util.List;
 public interface ParkingPerson {
 
     Ticket parking(Car car);
-    Car redeemCar(Ticket ticket);
+    Car fetchCar(Ticket ticket);
     ParkingLot chooseParkingLot();
 }

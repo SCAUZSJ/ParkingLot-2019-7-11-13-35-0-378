@@ -50,7 +50,7 @@ public class ParkingBoy implements ParkingPerson {
         }
         return ticket;
     }
-    public Car redeemCar(Ticket ticket){
+    public Car fetchCar(Ticket ticket){
 
         System.out.println(ticket);
         if(ticket == null) {
